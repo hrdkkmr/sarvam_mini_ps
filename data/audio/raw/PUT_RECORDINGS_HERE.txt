@@ -1,0 +1,3 @@
+Save your six recordings here as clip01.wav ... clip06.wav (or .flac/.ogg/.mp3; .m4a needs ffmpeg).
+Then run:  .venv\Scripts\python scripts\prepare_audio.py
+See data/RECORDING_GUIDE.md.

@@ -1,0 +1,159 @@
+{
+  "overall": {
+    "n": 415,
+    "accuracy": 0.9783132530120482,
+    "tp": 26,
+    "fp": 9,
+    "fn": 0,
+    "tn": 380,
+    "error_precision": 0.7428571428571429,
+    "error_recall": 1.0
+  },
+  "non_hard_variants": {
+    "n": 350,
+    "accuracy": 1.0,
+    "tp": 25,
+    "fp": 0,
+    "fn": 0,
+    "tn": 325,
+    "error_precision": 1.0,
+    "error_recall": 1.0
+  },
+  "hard_variants": {
+    "n": 65,
+    "accuracy": 0.8615384615384616,
+    "tp": 1,
+    "fp": 9,
+    "fn": 0,
+    "tn": 55,
+    "error_precision": 0.1,
+    "error_recall": 1.0
+  },
+  "by_category": {
+    "amount": {
+      "n": 79,
+      "accuracy": 1.0,
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "tn": 75,
+      "error_precision": 1.0,
+      "error_recall": 1.0
+    },
+    "correction": {
+      "n": 44,
+      "accuracy": 0.9090909090909091,
+      "tp": 5,
+      "fp": 4,
+      "fn": 0,
+      "tn": 35,
+      "error_precision": 0.5555555555555556,
+      "error_recall": 1.0
+    },
+    "digits": {
+      "n": 20,
+      "accuracy": 1.0,
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "tn": 18,
+      "error_precision": 1.0,
+      "error_recall": 1.0
+    },
+    "name": {
+      "n": 151,
+      "accuracy": 1.0,
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "tn": 146,
+      "error_precision": 1.0,
+      "error_recall": 1.0
+    },
+    "negation": {
+      "n": 121,
+      "accuracy": 0.9586776859504132,
+      "tp": 10,
+      "fp": 5,
+      "fn": 0,
+      "tn": 106,
+      "error_precision": 0.6666666666666666,
+      "error_recall": 1.0
+    }
+  },
+  "n_variants": 66,
+  "disagreements": [
+    {
+      "clip_id": "clip01",
+      "variant": "corr_retracted",
+      "entity_id": "c01_corr",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "abandoned_asserted"
+    },
+    {
+      "clip_id": "clip02",
+      "variant": "neg_rather_than",
+      "entity_id": "c02_neg",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "polarity_wrong"
+    },
+    {
+      "clip_id": "clip03",
+      "variant": "neg1_no_such",
+      "entity_id": "c03_neg1",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "polarity_wrong"
+    },
+    {
+      "clip_id": "clip03",
+      "variant": "neg3_unless",
+      "entity_id": "c03_neg3",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "polarity_wrong"
+    },
+    {
+      "clip_id": "clip04",
+      "variant": "time_dot",
+      "entity_id": "c04_corr",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "final_missing"
+    },
+    {
+      "clip_id": "clip04",
+      "variant": "time_retracted",
+      "entity_id": "c04_corr",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "abandoned_asserted"
+    },
+    {
+      "clip_id": "clip04",
+      "variant": "neg_unlikely",
+      "entity_id": "c04_neg",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "polarity_wrong"
+    },
+    {
+      "clip_id": "clip06",
+      "variant": "corr_retracted",
+      "entity_id": "c06_corr",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "abandoned_asserted"
+    },
+    {
+      "clip_id": "clip06",
+      "variant": "neg_unable",
+      "entity_id": "c06_neg",
+      "gold_correct": true,
+      "checker_pass": false,
+      "reason": "polarity_wrong"
+    }
+  ]
+}

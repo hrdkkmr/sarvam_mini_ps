@@ -1,0 +1,12 @@
+policy,kind,k,timing_source,n_clips,n_entities,AL_words,AP,AL_decision_s,AL_onset_s,first_output_s,end_offset_s,evidence_safe_rate,sim_entity_acc,fixed_text_acc
+wait-1,waitk,1,placeholder_estimate,6,37,-0.051,0.492,0.259,1.027,0.593,2.456,0.4595,0.4595,1.0
+wait-2,waitk,2,placeholder_estimate,6,37,0.918,0.507,0.631,1.419,1.028,2.722,0.4865,0.4865,1.0
+wait-3,waitk,3,placeholder_estimate,6,37,1.891,0.522,1.004,1.808,1.424,3.017,0.5405,0.5405,1.0
+wait-5,waitk,5,placeholder_estimate,6,37,3.862,0.553,1.764,2.556,2.206,3.651,0.6757,0.6757,1.0
+wait-7,waitk,7,placeholder_estimate,6,37,5.849,0.582,2.531,3.256,2.853,4.252,0.7568,0.7568,1.0
+EAW-lex k=2,eaw_lex,2,placeholder_estimate,6,37,1.439,0.515,0.846,2.196,1.028,3.571,0.5405,0.5405,1.0
+EAW-lex k=3,eaw_lex,3,placeholder_estimate,6,37,2.458,0.531,1.246,2.661,1.424,3.926,0.6216,0.6216,1.0
+EAW-pause k=2,eaw_pause,2,placeholder_estimate,6,37,3.157,0.542,1.511,3.052,1.028,4.284,0.6486,0.6486,1.0
+EAW-pause k=3,eaw_pause,3,placeholder_estimate,6,37,4.047,0.557,1.838,3.397,1.424,4.556,0.7297,0.7297,1.0
+sentence-by-sentence,sentence,,placeholder_estimate,6,37,6.917,0.607,2.769,5.799,4.508,7.942,0.973,0.973,1.0
+whole-clip,full,,placeholder_estimate,6,37,62.833,1.0,24.047,24.047,24.047,24.4,1.0,1.0,1.0

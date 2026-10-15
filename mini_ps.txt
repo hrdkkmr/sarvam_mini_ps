@@ -1,0 +1,59 @@
+mini_ps
+
+3. Part B — Research and ideas (40 points)
+The assignment asks you to select four open questions, provide evidence and risks, identify something the sources do not answer, check a misleading claim, and propose one original idea.
+
+I recommend these four questions because they connect directly to your ML implementation and can be studied in one evening:
+1. Training targets and word-level timing.
+2. Hard content: amounts, numbers, names, negations and self-corrections.
+3. Dataset sources and the real-versus-synthetic mixture.
+4. Latency and decoding-time choices.
+
+B1. Training targets and word-level timing
+Problem. A conventional translation model sees an entire sentence before producing its translation. A simultaneous translator must decide when each English word becomes safe to speak.
+Recommendation. Begin with sentence-level Hindi–English pairs and derive approximate word-level release times. Compare a fixed wait-\(k\) baseline against an adaptive policy that delays uncertain or context-dependent words.
+Hibiki provides a useful precedent: it uses a translation model's perplexity to estimate suitable delays for target words and generate synthetic aligned training examples. Its published experiments concern French–English speech translation, however, so its performance cannot automatically be assumed for code-mixed Hindi–English. 
+Cheapest experiment: take six recorded clips, create word-level Hindi timestamps, and compare \(k=2,3,5\) using the same translations and entity checker.
+Main risk: the model may learn an incorrect alignment and speak a plausible English sentence before hearing the Hindi words that disambiguate it.
+Question no source fully answers: what is the optimal release policy for Hindi–English code-mixing when numbers and negations receive a higher cost for being wrong?
+Potentially misleading claim to investigate: “A word-level alignment is the true translation timing.” An alignment is a supervision choice or estimate; it does not establish the earliest semantically safe moment to speak.
+
+B2. Hard content and self-corrections
+Problem. A system can produce fluent English while changing the meaning of an amount, dropping a negation, or ignoring a speaker's correction. These failures can be much more serious than a minor grammatical error.
+Recommendation. Create a dedicated entity-rich subset and measure accuracy separately for:
+- Amounts involving lakh and crore.
+- Phone numbers and other digit sequences.
+- Person, organisation and place names.
+- Negation and its scope.
+- Corrections, repetitions and disfluencies.
+Preserve the distinction between verbatim source transcripts and fluent target translations. The English need not preserve every filler word, but it must preserve the meaning, particularly the final corrected amount.
+Cheapest experiment: generate a small test set containing paired examples that differ in exactly one critical fact. Run the same translation system on both and use deterministic checks to compare the expected and predicted entities.
+Main risk: synthetic text and TTS may contain the correct amount in the script while the generated audio pronounces it incorrectly. Therefore, validate the audio as well as its text.
+Question no source fully answers: how should the evaluation score a correction that is initially translated incorrectly but subsequently spoken correctly?
+Potentially misleading claim to investigate: “A fluent translation is an accurate translation.” Fluency alone cannot establish entity or negation correctness; those need separate evaluation.
+
+B3. Data sources and synthetic speech
+Problem. The team has a 200-hour budget. It must cover natural speech, code-mixing, varied speakers and recording conditions, while also including enough rare entities and corrections to train the model.
+Recommendation. Start from legally usable existing speech resources, add consented recordings, and generate targeted synthetic examples to cover rare patterns.
+IndicVoices is a relevant resource: its dataset documentation describes read, extempore and conversational speech across Indian languages. The current Hugging Face card reports a CC BY 4.0 licence and access conditions that should be reviewed before redistribution. Dataset totals also change with releases, so record the exact version used. 
+For synthetic data, Hibiki demonstrates an approach for generating aligned training examples, but its French–English results are evidence for a method, not proof that the same mixture will work optimally for Hindi.
+Cheapest experiment: compare real-only, synthetic-only and mixed subsets on the same held-out set of human-recorded clips.
+Main risk: the model may perform well on clean, scripted speech but fail on spontaneous code-mixing, regional accents and corrections.
+Question no source fully answers: what fraction of synthetic audio is optimal for this specific Hindi–English task under a fixed 200-hour budget?
+Potentially misleading claim to investigate: “More synthetic hours always improve performance.” More hours can reinforce incorrect pronunciations, unrealistic speech patterns or flawed timing labels.
+
+B4. Latency and decoding-time choices
+Problem. A system that waits for the entire utterance may produce a correct translation but fail the real-time requirement. A system that speaks too early may make irreversible mistakes.
+Recommendation. Use wait-\(k\) as the baseline and evaluate several values of \(k\) using both Average Lagging and entity accuracy. STACL introduces wait-\(k\) as a controllable simultaneous translation policy, and SimulEval documents Average Lagging as a way to quantify the delay behind the source.
+Cheapest experiment: use the same six clips and translations for all policies. Plot entity accuracy against Average Lagging, then inspect the individual errors rather than reporting only a single aggregate score.
+Main risk: the system may look faster because of a measurement bug, or achieve high accuracy by waiting almost until the source ends.
+Question no source fully answers: how much extra delay should a system accept to avoid speaking a wrong amount or negation?
+Potentially misleading claim to investigate: “The smallest \(k\) is always the best setting for a real-time system.” It minimises the initial waiting requirement, but it may produce unacceptable errors.
+
+4. Part C — Dataset design (25 points)
+Part C should not repeat Part B. Here you need to turn the research into a concrete data-production pipeline and justify each step. The PDF specifically asks about sources, generation, transcripts, timing, translation, validation, real-world conditions and failure modes.
+
+C1. Recommended pipeline
+C2. Choices you should recommend
+C3. Validation checks and thresholds
+Do not invent precise thresholds and present them as established research findings. Propose initial thresholds as engineering choices, then tune them on manually reviewed data.

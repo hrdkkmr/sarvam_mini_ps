@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.tmp_decode.wav
+
+# third-party papers and archives: cite, do not redistribute
+*.pdf
+!report/submission_report.pdf
+IndicVoices-master.zip
+IndicVoices-master/
