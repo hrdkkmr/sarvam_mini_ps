@@ -1,0 +1,17 @@
+policy,kind,k,timing_source,n_clips,n_entities,AL_words,AP,AL_decision_s,AL_onset_s,first_output_s,end_offset_s,evidence_safe_rate,sim_entity_acc,fixed_text_acc,min_initial_src_words,seconds_status
+wait-1,waitk,1,placeholder_estimate,6,37,-0.051,0.492,0.259,1.027,0.593,2.456,0.4595,0.4595,1.0,1,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-2,waitk,2,placeholder_estimate,6,37,0.918,0.507,0.631,1.419,1.028,2.722,0.4865,0.4865,1.0,2,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-3,waitk,3,placeholder_estimate,6,37,1.891,0.522,1.004,1.808,1.424,3.017,0.5405,0.5405,1.0,3,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-4,waitk,4,placeholder_estimate,6,37,2.877,0.538,1.384,2.168,1.782,3.327,0.5676,0.5676,1.0,4,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-5,waitk,5,placeholder_estimate,6,37,3.862,0.553,1.764,2.556,2.206,3.651,0.6757,0.6757,1.0,5,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-6,waitk,6,placeholder_estimate,6,37,4.855,0.567,2.146,2.918,2.551,3.949,0.7297,0.7297,1.0,6,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-7,waitk,7,placeholder_estimate,6,37,5.849,0.582,2.531,3.256,2.853,4.252,0.7568,0.7568,1.0,7,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-8,waitk,8,placeholder_estimate,6,37,6.842,0.596,2.918,3.597,3.22,4.558,0.7838,0.7838,1.0,8,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-9,waitk,9,placeholder_estimate,6,37,7.836,0.61,3.303,3.98,3.633,4.892,0.8649,0.8649,1.0,9,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+wait-10,waitk,10,placeholder_estimate,6,37,8.829,0.624,3.688,4.354,4.008,5.214,0.8649,0.8649,1.0,10,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+EAW-lex k=2,eaw_lex,2,placeholder_estimate,6,37,1.439,0.515,0.846,2.196,1.028,3.571,0.5405,0.5405,1.0,2,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+EAW-lex k=3,eaw_lex,3,placeholder_estimate,6,37,2.458,0.531,1.246,2.661,1.424,3.926,0.6216,0.6216,1.0,3,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+EAW-pause k=2,eaw_pause,2,placeholder_estimate,6,37,3.157,0.542,1.511,3.052,1.028,4.284,0.6486,0.6486,1.0,2,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+EAW-pause k=3,eaw_pause,3,placeholder_estimate,6,37,4.047,0.557,1.838,3.397,1.424,4.556,0.7297,0.7297,1.0,3,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+sentence-by-sentence,sentence,,placeholder_estimate,6,37,6.917,0.607,2.769,5.799,4.508,7.942,0.973,0.973,1.0,7,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured
+whole-clip,full,,placeholder_estimate,6,37,62.833,1.0,24.047,24.047,24.047,24.4,1.0,1.0,1.0,52,ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured

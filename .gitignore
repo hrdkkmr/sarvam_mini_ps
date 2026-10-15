@@ -7,5 +7,7 @@ __pycache__/
 # third-party papers and archives: cite, do not redistribute
 *.pdf
 !report/submission_report.pdf
+!submission/submission_report.pdf
+submission_package.zip
 IndicVoices-master.zip
 IndicVoices-master/

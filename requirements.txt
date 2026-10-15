@@ -4,6 +4,8 @@ scipy>=1.13,<1.17
 matplotlib>=3.9,<3.11
 soundfile>=0.12,<0.14
 reportlab>=4.2,<4.6
+python-docx>=1.1,<2      # submission/submission_report.docx
+pypdfium2>=4             # page counts
 pytest>=8,<10
 openpyxl>=3.1,<4          # only to read the IndicVoices prompt banks (optional)
 

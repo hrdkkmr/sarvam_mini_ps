@@ -1,0 +1,369 @@
+{
+  "selection_rule": "Candidates wait-k k=1..10. Pareto frontier on (max evidence-safe rate, min AL in source words); knee = frontier point with the largest distance above the chord joining the frontier extremes after min-max normalisation; ties -> smaller k; alternatives = knee neighbours + points within 75% of the knee distance. Utility alpha sweep is a secondary sensitivity analysis.",
+  "data": {
+    "n_clips": 6,
+    "n_entities": 37,
+    "timing_source": "placeholder_estimate",
+    "seconds_status": "ESTIMATED: placeholder source timings + fixed 0.40 s/English word; not measured",
+    "tgt_word_s": 0.4,
+    "nature": "text-based timing simulation over fixed reference translations; no model run"
+  },
+  "accuracy_note": "evidence_safe_rate == sim_entity_acc for every policy in this data (each annotated premature guess fails the checker); fixed_text_acc is identical for every policy by construction.",
+  "sim_equals_evidence_safe": true,
+  "fixed_text_acc_values": [
+    1.0
+  ],
+  "primary_words": {
+    "accuracy_metric": "evidence_safe_rate",
+    "latency_metric": "AL_words",
+    "method": "knee",
+    "knee_distance": 0.0295,
+    "one_entity_in_normalised_units": 0.0667,
+    "knee_is_weak": true,
+    "candidates_k": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "pareto_k": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "dominated_k": [
+      10
+    ],
+    "knee_distance_by_k": {
+      "1": 0.0,
+      "2": -0.0374,
+      "3": -0.0308,
+      "4": -0.0695,
+      "5": 0.0247,
+      "6": 0.0295,
+      "7": -0.0098,
+      "8": -0.0492,
+      "9": 0.0,
+      "10": null
+    },
+    "selected": {
+      "k": 6,
+      "policy": "wait-6",
+      "evidence_safe_rate": 0.7297,
+      "AL_words": 4.855,
+      "knee_distance": 0.0295
+    },
+    "alternatives": [
+      {
+        "k": 5,
+        "policy": "wait-5",
+        "evidence_safe_rate": 0.6757,
+        "AL_words": 3.862,
+        "knee_distance": 0.0247
+      },
+      {
+        "k": 7,
+        "policy": "wait-7",
+        "evidence_safe_rate": 0.7568,
+        "AL_words": 5.849,
+        "knee_distance": -0.0098
+      }
+    ],
+    "vs_most_aggressive": {
+      "k": 1,
+      "latency_change": 4.906,
+      "accuracy_change_points": 27.02
+    },
+    "utility_sensitivity": [
+      {
+        "alpha": 0.1,
+        "selected_k": 1,
+        "utility": 0.9,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      },
+      {
+        "alpha": 0.2,
+        "selected_k": 1,
+        "utility": 0.8,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      },
+      {
+        "alpha": 0.3,
+        "selected_k": 1,
+        "utility": 0.7,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      },
+      {
+        "alpha": 0.4,
+        "selected_k": 1,
+        "utility": 0.6,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      },
+      {
+        "alpha": 0.5,
+        "selected_k": 6,
+        "utility": 0.557,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      },
+      {
+        "alpha": 0.6,
+        "selected_k": 9,
+        "utility": 0.6447,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      },
+      {
+        "alpha": 0.7,
+        "selected_k": 9,
+        "utility": 0.7335,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      },
+      {
+        "alpha": 0.8,
+        "selected_k": 9,
+        "utility": 0.8224,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      },
+      {
+        "alpha": 0.9,
+        "selected_k": 9,
+        "utility": 0.9112,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_words"
+      }
+    ],
+    "utility_selection_changes_with_alpha": true
+  },
+  "secondary_seconds_estimated": {
+    "accuracy_metric": "evidence_safe_rate",
+    "latency_metric": "AL_onset_s",
+    "method": "knee",
+    "knee_distance": 0.0173,
+    "one_entity_in_normalised_units": 0.0667,
+    "knee_is_weak": true,
+    "candidates_k": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "pareto_k": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "dominated_k": [
+      10
+    ],
+    "knee_distance_by_k": {
+      "1": 0.0,
+      "2": -0.0439,
+      "3": -0.0429,
+      "4": -0.0795,
+      "5": 0.0103,
+      "6": 0.0173,
+      "7": -0.0143,
+      "8": -0.0467,
+      "9": 0.0,
+      "10": null
+    },
+    "selected": {
+      "k": 6,
+      "policy": "wait-6",
+      "evidence_safe_rate": 0.7297,
+      "AL_onset_s": 2.918,
+      "knee_distance": 0.0173
+    },
+    "alternatives": [
+      {
+        "k": 5,
+        "policy": "wait-5",
+        "evidence_safe_rate": 0.6757,
+        "AL_onset_s": 2.556,
+        "knee_distance": 0.0103
+      },
+      {
+        "k": 7,
+        "policy": "wait-7",
+        "evidence_safe_rate": 0.7568,
+        "AL_onset_s": 3.256,
+        "knee_distance": -0.0143
+      }
+    ],
+    "vs_most_aggressive": {
+      "k": 1,
+      "latency_change": 1.891,
+      "accuracy_change_points": 27.02
+    },
+    "utility_sensitivity": [
+      {
+        "alpha": 0.1,
+        "selected_k": 1,
+        "utility": 0.9,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      },
+      {
+        "alpha": 0.2,
+        "selected_k": 1,
+        "utility": 0.8,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      },
+      {
+        "alpha": 0.3,
+        "selected_k": 1,
+        "utility": 0.7,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      },
+      {
+        "alpha": 0.4,
+        "selected_k": 1,
+        "utility": 0.6,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      },
+      {
+        "alpha": 0.5,
+        "selected_k": 9,
+        "utility": 0.5562,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      },
+      {
+        "alpha": 0.6,
+        "selected_k": 9,
+        "utility": 0.645,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      },
+      {
+        "alpha": 0.7,
+        "selected_k": 9,
+        "utility": 0.7337,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      },
+      {
+        "alpha": 0.8,
+        "selected_k": 9,
+        "utility": 0.8225,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      },
+      {
+        "alpha": 0.9,
+        "selected_k": 9,
+        "utility": 0.9112,
+        "accuracy_metric": "evidence_safe_rate",
+        "latency_metric": "AL_onset_s"
+      }
+    ],
+    "utility_selection_changes_with_alpha": true
+  },
+  "reference_policies_dominating_waitk_words": [
+    {
+      "policy": "EAW-lex k=2",
+      "evidence_safe_rate": 0.5405,
+      "AL_words": 1.439,
+      "dominates_waitk": [
+        3
+      ]
+    },
+    {
+      "policy": "EAW-lex k=3",
+      "evidence_safe_rate": 0.6216,
+      "AL_words": 2.458,
+      "dominates_waitk": [
+        4
+      ]
+    },
+    {
+      "policy": "EAW-pause k=2",
+      "evidence_safe_rate": 0.6486,
+      "AL_words": 3.157,
+      "dominates_waitk": []
+    },
+    {
+      "policy": "EAW-pause k=3",
+      "evidence_safe_rate": 0.7297,
+      "AL_words": 4.047,
+      "dominates_waitk": [
+        6
+      ]
+    },
+    {
+      "policy": "sentence-by-sentence",
+      "evidence_safe_rate": 0.973,
+      "AL_words": 6.917,
+      "dominates_waitk": [
+        9,
+        10
+      ]
+    }
+  ],
+  "reference_policies_dominating_waitk_seconds_estimated": [
+    {
+      "policy": "EAW-lex k=2",
+      "evidence_safe_rate": 0.5405,
+      "AL_onset_s": 2.196,
+      "dominates_waitk": []
+    },
+    {
+      "policy": "EAW-lex k=3",
+      "evidence_safe_rate": 0.6216,
+      "AL_onset_s": 2.661,
+      "dominates_waitk": []
+    },
+    {
+      "policy": "EAW-pause k=2",
+      "evidence_safe_rate": 0.6486,
+      "AL_onset_s": 3.052,
+      "dominates_waitk": []
+    },
+    {
+      "policy": "EAW-pause k=3",
+      "evidence_safe_rate": 0.7297,
+      "AL_onset_s": 3.397,
+      "dominates_waitk": []
+    },
+    {
+      "policy": "sentence-by-sentence",
+      "evidence_safe_rate": 0.973,
+      "AL_onset_s": 5.799,
+      "dominates_waitk": []
+    }
+  ]
+}

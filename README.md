@@ -4,8 +4,8 @@ Inter IIT Tech Meet 15.0, Sarvam.ai mini problem statement, Parts B–E (ML trac
 
 > **Current state (15 Oct 2026):** all code, tests, research write-ups and the checker
 > evaluation are complete. **The six required recordings have not been made yet.** Until they
-> are, timing-dependent results are computed from clearly labelled *placeholder* timings and are
-> written to `results/placeholder/`. See `FINAL_STATUS.md` for what you must do.
+> are, timing-dependent results are computed from clearly labelled *placeholder* timings (every row is
+> tagged `timing_source = placeholder_estimate`; seconds axes say ESTIMATED). See `FINAL_STATUS.md`.
 
 > **Methodological limitation (read before quoting any number):** the wait-k experiment is a
 > *timing simulation*. The English is a fixed reference translation prepared with the whole
@@ -25,9 +25,10 @@ data/audio/raw/                YOUR recordings go here (clip01.wav ...)
 data/audio/, data/alignments/, data/manifests/   generated
 src/                           library code (see report/PERSONAL_TECHNICAL_GUIDE.md Ch. 8)
 scripts/                       command-line steps, run_all.py runs everything
-tests/                         77 unit tests
+tests/                         85 unit tests
 results/                       generated metrics, plots, audits
-report/                        Part B/C write-ups, PDF builder, personal guide, viva bank
+report/                        Part B/C write-ups, PDF + submission builders, personal guide, viva bank
+submission/                    final shareable files (generated; see submission/README.md)
 RESULTS.md                     every reported number + the command that produced it (generated)
 SOURCE_NOTES.md, REQUIREMENTS_CHECKLIST.md, FINAL_STATUS.md
 ```
@@ -40,7 +41,7 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1          # if blocked: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 pip install torch --index-url https://download.pytorch.org/whl/cpu    # skip if torch is installed
 pip install -r requirements.txt
-python -m pytest -q                   # expect: 77 passed
+python -m pytest -q                   # expect: 85 passed
 ```
 
 The `.venv` in this folder was created with `--system-site-packages` to reuse the existing
@@ -59,8 +60,9 @@ If you see garbled Devanagari in the console, run `$env:PYTHONIOENCODING="utf-8"
 | 4. Forced alignment | `python scripts/run_alignment.py` | `data/alignments/clipNN.json` + Audacity label files |
 | 5. 30-boundary audit | `python scripts/audit_boundaries.py make-sheet`, mark onsets in Audacity, then `... score` | `results/boundary_audit.csv` |
 | 6. Checker accuracy | `python scripts/evaluate_checker.py` | `results/checker_summary.json` |
-| 7. Wait-k / EAW + plot | `python scripts/evaluate_waitk.py` | `results/metrics*.csv`, `results/latency_vs_entity_accuracy.png` |
+| 7. Wait-k sweep k=1..10 / EAW + plots + operating point | `python scripts/evaluate_waitk.py` | `results/metrics*.csv`, `results/k_sensitivity.csv`, `results/selected_operating_point.json`, `results/{latency_vs_entity_accuracy,k_sweep,pareto_frontier}.png` |
 | 8. RESULTS.md + PDF | `python scripts/write_results_md.py`; `python report/build_report.py` | `RESULTS.md`, `report/submission_report.pdf` |
+| 9. Shareable package | `python report/build_submission.py --name "Your Name" --pdf --zip` | `submission/` (MD + DOCX report, figures, data), `submission_package.zip` |
 | All of it | `python scripts/run_all.py` | all of the above that the inputs allow |
 
 ## Running on a new clip (interview)
@@ -84,7 +86,7 @@ If you see garbled Devanagari in the console, run `$env:PYTHONIOENCODING="utf-8"
 | Quantity | Status |
 |---|---|
 | Checker accuracy on 415 hand-labelled decisions | measured (labels are the author's, not independent) |
-| Word-based AL and evidence-safe rates for wait-k / EAW-lex | computed from the transcripts and translations; valid once the transcripts are verified |
+| Word-based AL and evidence-safe rates for wait-k (k = 1–10) / EAW-lex, Pareto/knee selection | computed from the transcripts and translations; valid once the transcripts are verified |
 | Seconds-based latency, EAW-pause, the plot | **placeholder timings until recordings exist** |
 | Alignment error (30 boundaries) | **pending** recordings + manual marking |
 | English speech durations | fixed 0.40 s/word estimate, not TTS measurements |

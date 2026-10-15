@@ -65,7 +65,7 @@ def build(name: str) -> Path:
     clips = load_all()
     timing = sorted({c.timing_source for c in clips})
     measured = timing == ["mms_fa_auto"]
-    wk = RES if measured else RES / "placeholder"
+    wk = RES   # every row carries timing_source / seconds_status (scripts/evaluate_waitk.py)
     agg = rcsv(wk / "metrics_aggregate.csv") if (wk / "metrics_aggregate.csv").exists() else []
     ents = rcsv(wk / "entity_timing.csv") if (wk / "entity_timing.csv").exists() else []
     chk = json.loads((RES / "checker_summary.json").read_text()) if (RES / "checker_summary.json").exists() else None
@@ -239,7 +239,7 @@ def build(name: str) -> Path:
         s.append(P(f"<b>Results</b> (6 clips, means; entities pooled){tag}", SMALL))
         s.append(table(rows, [W * 0.2, W * 0.1, W * 0.12, W * 0.12, W * 0.12, W * 0.12, W * 0.22], fs=6.4))
         img = wk / "latency_vs_entity_accuracy.png"
-        s.append(Image(str(img), width=W * 0.95, height=W * 0.95 * 3.6 / 9.2))
+        s.append(Image(str(img), width=W * 0.95, height=W * 0.95 * 4.1 / 9.2))
 
         def short(policy, eid):
             return [e["words_short"] for e in ents if e["policy"] == policy and e["entity_id"] == eid][0]
@@ -247,8 +247,11 @@ def build(name: str) -> Path:
         def cat_rate(policy, cat):
             rs = [e for e in ents if e["policy"] == policy and e["category"] == cat]
             return f"{sum(e['safe'] == 'True' for e in rs)}/{len(rs)}"
+        sel = json.loads((RES / "selected_operating_point.json").read_text())["primary_words"]
         s.append(P(f"<b>Findings.</b> (i) Raising k trades latency for safety monotonically (wait-3 → wait-7: {pct([a for a in agg if a['policy']=='wait-3'][0]['sim_entity_acc'])} → "
-                   f"{pct([a for a in agg if a['policy']=='wait-7'][0]['sim_entity_acc'])}). (ii) EAW helps exactly where its trigger is audible: self-corrections "
+                   f"{pct([a for a in agg if a['policy']=='wait-7'][0]['sim_entity_acc'])}). The k = 1–10 sweep's Pareto knee is wait-{sel['selected']['k']} "
+                   f"(alternatives {', '.join('wait-%d' % a['k'] for a in sel['alternatives'])}); the knee is {'weak (smaller than one entity)' if sel['knee_is_weak'] else 'clear'}, "
+                   "see the submission/ report. (ii) EAW helps exactly where its trigger is audible: self-corrections "
                    f"{cat_rate('wait-3', 'correction')} under wait-3 vs {cat_rate('EAW-lex k=3', 'correction')} (EAW-lex) and {cat_rate('EAW-pause k=3', 'correction')} (EAW-pause). "
                    f"(iii) It does <b>not</b> help negation ({cat_rate('wait-3', 'negation')} vs {cat_rate('EAW-pause k=3', 'negation')}): English commits 'not' before the Hindi "
                    "clause-final nahin + verb is spoken, so no heard word can trigger the wait. This falsifies the purely source-triggered version of our idea; the wait must be "

@@ -65,7 +65,9 @@ class Policy:
         return g, p
 
 
-DEFAULT_POLICIES = [Policy(f"wait-{k}", "waitk", k) for k in (1, 2, 3, 5, 7)] + \
+WAITK_SWEEP = tuple(range(1, 11))       # k = 1..10, evaluated automatically (src/sweep.py)
+
+DEFAULT_POLICIES = [Policy(f"wait-{k}", "waitk", k) for k in WAITK_SWEEP] + \
     [Policy(f"EAW-lex k={k}", "eaw_lex", k) for k in (2, 3)] + \
     [Policy(f"EAW-pause k={k}", "eaw_pause", k) for k in (2, 3)] + \
     [Policy("sentence-by-sentence", "sentence", None), Policy("whole-clip", "full", None)]

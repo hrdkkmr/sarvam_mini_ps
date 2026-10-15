@@ -12,6 +12,7 @@ Steps (each is also runnable on its own):
   7. scripts/audit_boundaries.py score        only if the manual sheet has entries
   8. scripts/write_results_md.py              RESULTS.md from the result files
   9. report/build_report.py                   report/submission_report.pdf
+ 10. report/build_submission.py --zip         submission/ (Markdown + DOCX report, figures, data)
 A failing step is reported and the remaining steps still run; the exit code is non-zero.
 """
 from __future__ import annotations
@@ -62,6 +63,7 @@ def main() -> int:
     status["results_md"] = run("results_md", ["scripts/write_results_md.py"])
     if not a.skip_report:
         status["report"] = run("report", ["report/build_report.py"])
+        status["submission"] = run("submission", ["report/build_submission.py", "--zip"])
     print("\nSUMMARY:", ", ".join(f"{k}={'ok' if v else 'FAILED'}" for k, v in status.items()))
     return 0 if all(status.values()) else 1
 

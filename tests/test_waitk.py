@@ -87,5 +87,5 @@ def test_whole_clip_policy_is_evidence_safe():
 
 def test_larger_k_never_less_safe():
     for c in load_all():
-        safe = [simulate(c, Policy("w", "waitk", k)).metrics["evidence_safe"] for k in (1, 2, 3, 5, 7)]
+        safe = [simulate(c, Policy("w", "waitk", k)).metrics["evidence_safe"] for k in range(1, 11)]
         assert safe == sorted(safe)

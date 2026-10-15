@@ -67,7 +67,7 @@ Reference translations (literal): 30/37 entities pass (`results/reference_check.
 
 ## Wait-k / entity-aware waiting simulation
 
-Command: `.venv\Scripts\python scripts/evaluate_waitk.py` -> `results/placeholder/metrics_aggregate.csv`, per-clip `results/placeholder/metrics.csv`, plot `results/placeholder/latency_vs_entity_accuracy.png`
+Command: `.venv\Scripts\python scripts/evaluate_waitk.py` -> `results/metrics_aggregate.csv`, per-clip `results/metrics.csv`, plot `results/latency_vs_entity_accuracy.png`
 
 Timing source: **placeholder_estimate**. English word duration: fixed 0.40 s (estimate). Latency columns are means over clips; entity columns are pooled over all annotated entities. `fixed text` = checker on the unmodified reference (identical for every policy by construction); `simulated` = ambiguity-sensitive stress test (entity replaced by its annotated premature guess if committed before its determining source word).
 
@@ -76,8 +76,13 @@ Timing source: **placeholder_estimate**. English word duration: fixed 0.40 s (es
 | wait-1 | -0.05 | 0.26 | 1.03 | 0.59 | 2.46 | 37 | 46.0% | 46.0% | 100.0% |
 | wait-2 | 0.92 | 0.63 | 1.42 | 1.03 | 2.72 | 37 | 48.6% | 48.6% | 100.0% |
 | wait-3 | 1.89 | 1.00 | 1.81 | 1.42 | 3.02 | 37 | 54.0% | 54.0% | 100.0% |
+| wait-4 | 2.88 | 1.38 | 2.17 | 1.78 | 3.33 | 37 | 56.8% | 56.8% | 100.0% |
 | wait-5 | 3.86 | 1.76 | 2.56 | 2.21 | 3.65 | 37 | 67.6% | 67.6% | 100.0% |
+| wait-6 | 4.86 | 2.15 | 2.92 | 2.55 | 3.95 | 37 | 73.0% | 73.0% | 100.0% |
 | wait-7 | 5.85 | 2.53 | 3.26 | 2.85 | 4.25 | 37 | 75.7% | 75.7% | 100.0% |
+| wait-8 | 6.84 | 2.92 | 3.60 | 3.22 | 4.56 | 37 | 78.4% | 78.4% | 100.0% |
+| wait-9 | 7.84 | 3.30 | 3.98 | 3.63 | 4.89 | 37 | 86.5% | 86.5% | 100.0% |
+| wait-10 | 8.83 | 3.69 | 4.35 | 4.01 | 5.21 | 37 | 86.5% | 86.5% | 100.0% |
 | EAW-lex k=2 | 1.44 | 0.85 | 2.20 | 1.03 | 3.57 | 37 | 54.0% | 54.0% | 100.0% |
 | EAW-lex k=3 | 2.46 | 1.25 | 2.66 | 1.42 | 3.93 | 37 | 62.2% | 62.2% | 100.0% |
 | EAW-pause k=2 | 3.16 | 1.51 | 3.05 | 1.03 | 4.28 | 37 | 64.9% | 64.9% | 100.0% |
@@ -85,9 +90,24 @@ Timing source: **placeholder_estimate**. English word duration: fixed 0.40 s (es
 | sentence-by-sentence | 6.92 | 2.77 | 5.80 | 4.51 | 7.94 | 37 | 97.3% | 97.3% | 100.0% |
 | whole-clip | 62.83 | 24.05 | 24.05 | 24.05 | 24.40 | 37 | 100.0% | 100.0% | 100.0% |
 
+### Wait-k sweep (k = 1..10) and operating-point selection
+
+Command: `.venv\Scripts\python scripts/evaluate_waitk.py` -> `results/selected_operating_point.json`, `results/k_sensitivity.csv`, `results/k_sweep.png`, `results/pareto_frontier.png`
+
+Rule: Candidates wait-k k=1..10. Pareto frontier on (max evidence-safe rate, min AL in source words); knee = frontier point with the largest distance above the chord joining the frontier extremes after min-max normalisation; ties -> smaller k; alternatives = knee neighbours + points within 75% of the knee distance. Utility alpha sweep is a secondary sensitivity analysis.
+
+- Accuracy metric: evidence-safe entity rate (equal to simulated entity accuracy for every policy: True). Fixed-reference accuracy values across all policies: 100.0% (identical by construction).
+- Pareto-optimal k (AL in words): [1, 2, 3, 4, 5, 6, 7, 8, 9]; dominated: [10].
+- **Selected: wait-6** — evidence-safe 73.0%, AL 4.86 source words; knee distance 0.0295 vs one-entity resolution 0.0667 → knee is **weak**.
+- Near-equivalent alternatives: wait-5 (67.6%, AL 3.86); wait-7 (75.7%, AL 5.85).
+- Versus wait-1: AL +4.91 source words, evidence-safe +27.0 percentage points.
+- Utility sensitivity (alpha -> k, words): 0.1→1, 0.2→1, 0.3→1, 0.4→1, 0.5→6, 0.6→9, 0.7→9, 0.8→9, 0.9→9; changes with alpha: True.
+- Same rule on estimated seconds (AL of speech onsets, ESTIMATED): wait-6; alpha -> k: 0.1→1, 0.2→1, 0.3→1, 0.4→1, 0.5→9, 0.6→9, 0.7→9, 0.8→9, 0.9→9.
+- Reference policies that dominate wait-k points (words): EAW-lex k=2 dominates wait-[3]; EAW-lex k=3 dominates wait-[4]; EAW-pause k=3 dominates wait-[6]; sentence-by-sentence dominates wait-[9, 10]. On estimated seconds: none.
+
 ### Error analysis: entities committed after their determining word, by category
 
-Source: `results/placeholder/entity_timing.csv` (same command).
+Source: `results/entity_timing.csv` (same command).
 
 | category | wait-3 | wait-5 | wait-7 | EAW-lex k=3 | EAW-pause k=3 | sentence-by-sentence |
 |---|---|---|---|---|---|---|

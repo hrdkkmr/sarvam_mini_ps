@@ -1,4 +1,4 @@
-# Viva question bank (67 questions)
+# Viva question bank (75 questions)
 
 Tags: **[code]** about our exact implementation, **[math]** metrics/derivations, **[research]** papers/datasets,
 **[adv]** adversarial challenges. Each answer is meant to be spoken in 30–60 s. "FU" = likely follow-up.
@@ -248,7 +248,7 @@ A second annotator and new held-out variants are the fix.
 
 **58. Your recordings don't exist yet. What is actually measured?** [adv]
 Measured: checker accuracy, and all text-level quantities (word AL, evidence-safe rates for wait-k and EAW-lex). Placeholder: seconds-based latency, EAW-pause, the plot.
-Pending: the alignment audit. Everything placeholder is written to `results/placeholder/` and the plot title says so in red.
+Pending: the alignment audit. Every result row carries `timing_source = placeholder_estimate` and `seconds_status = ESTIMATED`, and every seconds axis on the plots says ESTIMATED in red.
 
 **59. Isn't the premature guess ("five lakh") something you invented to make waiting look good?** [adv]
 It is hand-written and disclosed. But it is the most plausible prefix hypothesis given what has been heard ("…पाँच लाख"). The rate that matters, *evidence-safe*, doesn't depend on the guess
@@ -282,3 +282,29 @@ the implementation convention.
 **67. What would you do differently with one more week?** [adv]
 Record and align; run the audit; get second-annotator labels; add target-side polarity holding; measure TTS durations; build a prefix-decoding MT baseline so that entity accuracy reflects real
 generation, not a fixed reference.
+
+## Added 15 Oct 2026: the k = 1–10 sweep (see guide Ch. 13)
+
+**68. Why did you sweep k from 1 to 10?** [int]
+To avoid assuming the answer. Every k is evaluated with identical clips, references, entities, checker and conventions, and a written rule picks the operating point. The range runs from AL ≈ 0 to about one clause behind.
+
+**69. Which k did you choose, and why?** [int]
+wait-6: the knee of the Pareto frontier (73.0% evidence-safe at AL 4.86 source words). wait-5 and wait-7 are near-equivalent. The knee is weak (its distance is smaller than the effect of one entity), so I report a band, not an optimum.
+
+**70. What is a Pareto frontier? Is k = 10 on it?** [beg]
+It is the set of policies that no other policy beats on both accuracy and latency. k = 10 is not on it: it has the same 86.5% as k = 9 with about one more word of lag.
+
+**71. Your accuracy is 100% for every k. Isn't the experiment pointless?** [adv]
+Fixed-reference accuracy is constant *by construction*, because the text never changes. That is why we report the evidence-safe rate and the stress-test accuracy separately, and state explicitly that neither is a model's accuracy.
+
+**72. Why are the evidence-safe rate and simulated accuracy identical?** [adv]
+Every hand-written premature guess fails the checker, so in the stress test "early" always means "wrong". They are one piece of evidence, not two.
+
+**73. Does the selection depend on your utility weight?** [adv]
+Yes, strongly: α ≤ 0.4 gives k = 1, α = 0.5 gives k = 6, and α ≥ 0.6 gives k = 9. That jump is what a near-linear trade-off looks like. This is why the primary rule is the Pareto knee and the utility is only a sensitivity check.
+
+**74. How is this different from Hibiki?** [adv]
+Hibiki learns content-dependent delays from contextual alignment (jumps in MT log-likelihood under MADLAD-3B, plus a 2 s safety lag). Wait-k uses one fixed head start. We implemented only wait-k (and the heuristic EAW). Hibiki is the motivation, not a reproduced baseline.
+
+**75. Would the chosen k survive real audio?** [adv]
+The word-level curve would, as long as the transcripts are unchanged. The seconds axis would not: real TTS durations, pauses and compute time change the queueing, mostly for large k. The k must be re-tuned after alignment.

@@ -46,7 +46,7 @@ is quoted or closely paraphrased from it. Status values: **complete**, **partial
 ## Part E: ML track (15 pts)
 | # | Requirement | Status | Where |
 |---|---|---|---|
-| E1 | Simulate wait-k on your clips for several k (Part C timings as the Hindi timeline) | partial | Implemented for k = 1, 2, 3, 5, 7 + EAW + sentence/whole-clip baselines. Currently runs on **placeholder timings** → `results/placeholder/`. Re-run after alignment |
+| E1 | Simulate wait-k on your clips for several k (Part C timings as the Hindi timeline) | partial | Automatic sweep k = 1–10 + EAW + sentence/whole-clip baselines, Pareto/knee operating point (`src/sweep.py`). Seconds use **placeholder timings** (tagged in every row). Re-run after alignment |
 | E2 | Fixed English word duration or TTS-measured | complete | Fixed 0.40 s per word (estimate), CLI flag `--tgt-word-s` |
 | E3 | Score each run with the entity checker | complete | fixed-text and ambiguity-sensitive simulated scores |
 | E4 | Plot entity accuracy vs latency | partial | Plot generated from placeholder timings (labelled in red). Final plot after recordings |

@@ -2,7 +2,7 @@
 
 **Status: no recordings exist yet.** The pipeline never generates or substitutes audio for these
 clips. Until you record them, every timing-dependent number is computed from *placeholder*
-timings and is written to `results/placeholder/`, which the report labels as not measured.
+timings; every result row is tagged `placeholder_estimate` and the plots/report label seconds as estimated.
 
 ## Before you record
 
